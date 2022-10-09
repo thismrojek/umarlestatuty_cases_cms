@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "node-sass": "^7.0.1",
-    "sass": "^1.54.5"
+    "sass": "^1.54.5",
+    "svelte-select": "^4.4.7"
   }
 }
