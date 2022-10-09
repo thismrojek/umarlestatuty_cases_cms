@@ -1,11 +1,17 @@
-<script>
+<script lang="ts">
     import Logo from "@images/logo.svg";
+
+    export let title: string;
 </script>
 
 <header>
     <img src={Logo} alt="logo">
-    <h1>Panel spisu interwencji</h1>
-    <h2>Zarządzaj potężnym spisem interwencji stworzonym przez potężny pion IT</h2>
+    {#if !title}
+        <h1>Panel spisu interwencji</h1>
+        <h2>Zarządzaj potężnym spisem interwencji stworzonym przez potężny pion IT</h2>
+    {:else}
+        <h1>{title}</h1>
+    {/if}
     <div class="dividerLine" />
 </header>
 
