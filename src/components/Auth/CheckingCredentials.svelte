@@ -1,18 +1,20 @@
 <script lang="ts">
     import Auth from "@lib/Auth";
-    import Const from "@type/Const";
+    import { authState } from "@stores/authState";
     import { onMount } from "svelte";
     import AuthAnimation from "./AuthAnimation.svelte";
 
-    onMount(() => {
-        const CredentialsManager = new Auth();
-        const credentials = CredentialsManager.getCredentials();
+    let authVerified: boolean;
 
-        console.log(credentials);
-        
-    })
+    onMount(async () => {
+        const CredentialsManager = new Auth();
+        authVerified = await CredentialsManager.verifyCredentials();
+        authState.set(authVerified);
+    });
 </script>
 
 <section class="checkingCredentials">
-   <AuthAnimation /> 
+    {#if !authVerified}
+        <AuthAnimation bind:authVerified />
+    {/if}
 </section>

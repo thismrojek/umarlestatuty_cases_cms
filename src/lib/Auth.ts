@@ -1,4 +1,5 @@
 import Const from "@type/Const";
+import REST from "../data/REST";
 
 export default class Auth {
     username: string;
@@ -12,7 +13,8 @@ export default class Auth {
 
     getCredentials() {
         const { username, accessToken } = this;
-        return { username, accessToken };
+        const basicAuth: string = `Basic ${btoa(`${username}:${accessToken}`)}`;
+        return { username, accessToken, basicAuth };
     }
 
     updateCredentialsInStorage() {
@@ -21,6 +23,10 @@ export default class Auth {
     }
 
     async verifyCredentials() {
-
+        const Rest = new REST();
+        const credentialsVerified: boolean = await Rest.request.credentials.verify();
+        if (credentialsVerified) this.updateCredentialsInStorage();
+        
+        return credentialsVerified;
     }
 }
