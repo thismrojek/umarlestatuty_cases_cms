@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
     import AuthAnimation from "@images/auth.gif";
+    import ErrorAnimation from "@images/error.gif";
+
+    export let authVerified: boolean;
 </script>
 
 <section class="authAnimation">
-    <img src={AuthAnimation} alt="Auth animation">
+    <img src={authVerified == false ? ErrorAnimation : AuthAnimation} alt="Auth animation">
 </section>
 
 <style lang="scss">
